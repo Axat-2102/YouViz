@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from demo.ninjateam.org/html/spaceX/light/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Mar 2022 04:57:51 GMT -->
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
 
     <title>YouViz</title>
 
@@ -78,28 +73,6 @@
             </select>
             <!-- /.page-title -->
         </div>
-        <!-- /.float-left -->
-        <!-- <div class="float-right">
-            <div class="ico-item">
-                <a href="#" class="ico-item ti-search js__toggle_open" data-target="#searchform-header"></a>
-                <form action="#" id="searchform-header" class="searchform js__toggle"><input type="search"
-                        placeholder="Search..." class="input-search"><button class="ti-search button-search"
-                        type="submit"></button></form>
-                 /.searchform 
-            </div>
-             /.ico-item 
-            <a href="#" class="ico-item ti-email notice-alarm js__toggle_open" data-target="#message-popup"></a>
-            <a href="#" class="ico-item ti-bell notice-alarm js__toggle_open" data-target="#notification-popup"></a>
-            <div class="ico-item">
-                <i class="ti-user"></i>
-                <ul class="sub-ico-item">
-                    <li><a href="#">Settings</a></li>
-                    <li><a class="js__logout" href="#">Log Out</a></li>
-                </ul>
-                 /.sub-ico-item 
-            </div>
-        </div> -->
-        <!-- /.float-right -->
     </div>
     <!-- /.fixed-navbar -->
 
@@ -136,7 +109,6 @@
         <!-- /.main-content -->
     </div>
     <!--/#wrapper -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/scripts/jquery.min.js" type="text/javascript"></script>
     <script src="assets/scripts/modernizr.min.js" type="text/javascript"></script>
     <script src="assets/plugin/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -149,56 +121,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
-
-
-    <!-- <script>
-        $(document).ready(function () {
-            $.getJSON("Datasets/US_category_id.json", function (data) {
-                //get cat
-                const category_id = [];
-                for (let i = 0; i < data.items.length; i++) {
-                    console.log("ID - " + data.items[i].id + " And Title" + data.items[i].snippet.title);
-                    category_id.push(data.items[i].id);
-                }
-                
-                //get videos from cat
-                var videos;
-                const videoscat = [];
-                const videosbycat = [];
-                for (let i = 0; i < 2; i++) {
-                $.ajax({
-                    type: "GET",
-                    url: "Datasets/USvideos.csv",
-                    dataType: "text",
-                    success: function (response) {
-                        videos = $.csv.toObjects(response);
-                        for (let i = 0; i < videos.length; i++) {
-                            if (videos[i].category_id == 1){
-                                console.log(videos[i].video_id);
-                                videoscat.push(videos[i].video_id);
-                            }
-                        }
-                        console.log(videoscat);
-                    }
-                });
-            }
-            });
-        });
-    </script> -->
-
-    <!-- <script>
-        $(document).ready(function () {
-            $.getJSON("Datasets/US_category_id.json", function (data) {
-                const labels = []
-                //get cat
-                const category_id = [];
-                for (let i = 0; i < data.items.length; i++) {
-                    console.log("ID - " + data.items[i].id + " And Title" + data.items[i].snippet.title);
-                    category_id.push(data.items[i].id);
-                }
-            });
-        });
-    </script> -->
 
 
 
@@ -466,8 +388,6 @@
     <script src="assets/scripts/mycommon.js" type="text/javascript"></script>
     <script src="assets/scripts/rocket-loader.min.js" type="text/javascript"></script>
 </body>
-
-<!-- Mirrored from demo.ninjateam.org/html/spaceX/light/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Mar 2022 04:58:15 GMT -->
 
 </html>
 
