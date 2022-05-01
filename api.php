@@ -16,7 +16,7 @@ header("Access-Control-Allow-Origin: *");
 
 $method = $_GET['method'];
 
-$obj = new Zoedesk();
+$obj = new YouViz();
 
 if ($method == 'getuscategory') {
     $obj->getuscategory();
@@ -114,20 +114,10 @@ if ($method == 'getuscategory') {
     $obj->gettop5bycommentsfr();
 } else if ($method == 'gettop5bycommentsin') {
     $obj->gettop5bycommentsin();
-} else if ($method == 'getRegisteredData') {
-    $obj->getRegisteredData();
-} else if ($method == 'GetCityName') {
-    $obj->GetCityName();
-} else if ($method == 'getTravellerData') {
-    $obj->getTravellerData();
-} else if ($method == 'searchRegisteredData') {
-    $obj->searchRegisteredData();
-} else if ($method == 'getUserByGin') {
-    $obj->getUserByGin();
 } else {
     echo 'why are you here';
 }
-class Zoedesk
+class YouViz
 {
 
     public function getuscategory()
@@ -203,7 +193,6 @@ class Zoedesk
             $dataset['y'] = $views;
             array_push($dataforset, $dataset);
         }
-        //array_push($jsondataset,"label: 'Category-1'");
         array_push($jsondataset, $dataforset);
         echo json_encode($dataforset);
     }
@@ -244,7 +233,6 @@ class Zoedesk
             $dataset['y'] = $views;
             array_push($dataforset, $dataset);
         }
-        //array_push($jsondataset,"label: 'Category-1'");
         array_push($jsondataset, $dataforset);
         echo json_encode($dataforset);
     }
@@ -286,7 +274,6 @@ class Zoedesk
             $dataset['y'] = $views;
             array_push($dataforset, $dataset);
         }
-        //array_push($jsondataset,"label: 'Category-1'");
         array_push($jsondataset, $dataforset);
         echo json_encode($dataforset);
     }
@@ -328,7 +315,6 @@ class Zoedesk
             $dataset['y'] = $views;
             array_push($dataforset, $dataset);
         }
-        //array_push($jsondataset,"label: 'Category-1'");
         array_push($jsondataset, $dataforset);
         echo json_encode($dataforset);
     }
@@ -370,103 +356,102 @@ class Zoedesk
             $dataset['y'] = $views;
             array_push($dataforset, $dataset);
         }
-        //array_push($jsondataset,"label: 'Category-1'");
         array_push($jsondataset, $dataforset);
         echo json_encode($dataforset);
     }
 
 
-        // like
-        public function getcon()
-        {
-            include 'db_config.php';
-            $cat_id = isset($_POST['cat_id']) ? $_POST['cat_id'] : "";
-            $likes = [];
-            $xd = [];
-    
-            $sqlus = "SELECT avg(likes) FROM `mytable` WHERE `category_id` = '$cat_id'";
-            $sqlca = "SELECT avg(likes) FROM `mytable_ca` WHERE `category_id` = '$cat_id'";
-            $sqlgb = "SELECT avg(likes) FROM `mytable_gb` WHERE `category_id` = '$cat_id'";
-            $sqlfr = "SELECT avg(likes) FROM `mytable_fr` WHERE `category_id` = '$cat_id'";
-            $sqlin = "SELECT avg(likes) FROM `mytable` WHERE `category_id` = '$cat_id'";
-            
-            $resultus = mysqli_query($link,$sqlus);
-            $resultca = mysqli_query($link,$sqlca);
-            $resultgb = mysqli_query($link,$sqlgb);
-            $resultfr = mysqli_query($link,$sqlfr);
-            $resultin = mysqli_query($link,$sqlin);
-    
-            $us = mysqli_fetch_assoc($resultus);
-            $ca = mysqli_fetch_assoc($resultca);
-            $gb = mysqli_fetch_assoc($resultgb);
-            $fr = mysqli_fetch_assoc($resultfr);
-            $in = mysqli_fetch_assoc($resultin);
-    
-            $likes['x'] = 'United States';
-            $likes['y'] = $us['avg(likes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'Canada';
-            $likes['y'] = $ca['avg(likes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'Great Britan';
-            $likes['y'] = $gb['avg(likes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'France';
-            $likes['y'] = $fr['avg(likes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'India';
-            $likes['y'] = $in['avg(likes)'];
-            array_push($xd, $likes);
-    
-    
-            echo json_encode($xd);
-        }
-    
-        // Dislike
-        public function getcondislike()
-        {
-            include 'db_config.php';
-            $cat_id = isset($_POST['cat_id']) ? $_POST['cat_id'] : "";
-            $likes = [];
-            $xd = [];
-    
-            $sqlus = "SELECT avg(dislikes) FROM `mytable` WHERE `category_id` = '$cat_id'";
-            $sqlca = "SELECT avg(dislikes) FROM `mytable_ca` WHERE `category_id` = '$cat_id'";
-            $sqlgb = "SELECT avg(dislikes) FROM `mytable_gb` WHERE `category_id` = '$cat_id'";
-            $sqlfr = "SELECT avg(dislikes) FROM `mytable_fr` WHERE `category_id` = '$cat_id'";
-            $sqlin = "SELECT avg(dislikes) FROM `mytable` WHERE `category_id` = '$cat_id'";
-            
-            $resultus = mysqli_query($link,$sqlus);
-            $resultca = mysqli_query($link,$sqlca);
-            $resultgb = mysqli_query($link,$sqlgb);
-            $resultfr = mysqli_query($link,$sqlfr);
-            $resultin = mysqli_query($link,$sqlin);
-    
-            $us = mysqli_fetch_assoc($resultus);
-            $ca = mysqli_fetch_assoc($resultca);
-            $gb = mysqli_fetch_assoc($resultgb);
-            $fr = mysqli_fetch_assoc($resultfr);
-            $in = mysqli_fetch_assoc($resultin);
-    
-            $likes['x'] = 'United States';
-            $likes['y'] = $us['avg(dislikes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'Canada';
-            $likes['y'] = $ca['avg(dislikes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'Great Britan';
-            $likes['y'] = $gb['avg(dislikes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'France';
-            $likes['y'] = $fr['avg(dislikes)'];
-            array_push($xd, $likes);
-            $likes['x'] = 'India';
-            $likes['y'] = $in['avg(dislikes)'];
-            array_push($xd, $likes);
-    
-    
-            echo json_encode($xd);
-        }
+    // like
+    public function getcon()
+    {
+        include 'db_config.php';
+        $cat_id = isset($_POST['cat_id']) ? $_POST['cat_id'] : "";
+        $likes = [];
+        $xd = [];
+
+        $sqlus = "SELECT avg(likes) FROM `mytable` WHERE `category_id` = '$cat_id'";
+        $sqlca = "SELECT avg(likes) FROM `mytable_ca` WHERE `category_id` = '$cat_id'";
+        $sqlgb = "SELECT avg(likes) FROM `mytable_gb` WHERE `category_id` = '$cat_id'";
+        $sqlfr = "SELECT avg(likes) FROM `mytable_fr` WHERE `category_id` = '$cat_id'";
+        $sqlin = "SELECT avg(likes) FROM `mytable` WHERE `category_id` = '$cat_id'";
+
+        $resultus = mysqli_query($link, $sqlus);
+        $resultca = mysqli_query($link, $sqlca);
+        $resultgb = mysqli_query($link, $sqlgb);
+        $resultfr = mysqli_query($link, $sqlfr);
+        $resultin = mysqli_query($link, $sqlin);
+
+        $us = mysqli_fetch_assoc($resultus);
+        $ca = mysqli_fetch_assoc($resultca);
+        $gb = mysqli_fetch_assoc($resultgb);
+        $fr = mysqli_fetch_assoc($resultfr);
+        $in = mysqli_fetch_assoc($resultin);
+
+        $likes['x'] = 'United States';
+        $likes['y'] = $us['avg(likes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'Canada';
+        $likes['y'] = $ca['avg(likes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'Great Britan';
+        $likes['y'] = $gb['avg(likes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'France';
+        $likes['y'] = $fr['avg(likes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'India';
+        $likes['y'] = $in['avg(likes)'];
+        array_push($xd, $likes);
+
+
+        echo json_encode($xd);
+    }
+
+    // Dislike
+    public function getcondislike()
+    {
+        include 'db_config.php';
+        $cat_id = isset($_POST['cat_id']) ? $_POST['cat_id'] : "";
+        $likes = [];
+        $xd = [];
+
+        $sqlus = "SELECT avg(dislikes) FROM `mytable` WHERE `category_id` = '$cat_id'";
+        $sqlca = "SELECT avg(dislikes) FROM `mytable_ca` WHERE `category_id` = '$cat_id'";
+        $sqlgb = "SELECT avg(dislikes) FROM `mytable_gb` WHERE `category_id` = '$cat_id'";
+        $sqlfr = "SELECT avg(dislikes) FROM `mytable_fr` WHERE `category_id` = '$cat_id'";
+        $sqlin = "SELECT avg(dislikes) FROM `mytable` WHERE `category_id` = '$cat_id'";
+
+        $resultus = mysqli_query($link, $sqlus);
+        $resultca = mysqli_query($link, $sqlca);
+        $resultgb = mysqli_query($link, $sqlgb);
+        $resultfr = mysqli_query($link, $sqlfr);
+        $resultin = mysqli_query($link, $sqlin);
+
+        $us = mysqli_fetch_assoc($resultus);
+        $ca = mysqli_fetch_assoc($resultca);
+        $gb = mysqli_fetch_assoc($resultgb);
+        $fr = mysqli_fetch_assoc($resultfr);
+        $in = mysqli_fetch_assoc($resultin);
+
+        $likes['x'] = 'United States';
+        $likes['y'] = $us['avg(dislikes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'Canada';
+        $likes['y'] = $ca['avg(dislikes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'Great Britan';
+        $likes['y'] = $gb['avg(dislikes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'France';
+        $likes['y'] = $fr['avg(dislikes)'];
+        array_push($xd, $likes);
+        $likes['x'] = 'India';
+        $likes['y'] = $in['avg(dislikes)'];
+        array_push($xd, $likes);
+
+
+        echo json_encode($xd);
+    }
 
     // comment
     public function getconcomment()
@@ -481,12 +466,12 @@ class Zoedesk
         $sqlgb = "SELECT avg(comment_count) FROM `mytable_gb` WHERE `category_id` = '$cat_id'";
         $sqlfr = "SELECT avg(comment_count) FROM `mytable_fr` WHERE `category_id` = '$cat_id'";
         $sqlin = "SELECT avg(comment_count) FROM `mytable` WHERE `category_id` = '$cat_id'";
-        
-        $resultus = mysqli_query($link,$sqlus);
-        $resultca = mysqli_query($link,$sqlca);
-        $resultgb = mysqli_query($link,$sqlgb);
-        $resultfr = mysqli_query($link,$sqlfr);
-        $resultin = mysqli_query($link,$sqlin);
+
+        $resultus = mysqli_query($link, $sqlus);
+        $resultca = mysqli_query($link, $sqlca);
+        $resultgb = mysqli_query($link, $sqlgb);
+        $resultfr = mysqli_query($link, $sqlfr);
+        $resultin = mysqli_query($link, $sqlin);
 
         $us = mysqli_fetch_assoc($resultus);
         $ca = mysqli_fetch_assoc($resultca);
@@ -513,51 +498,6 @@ class Zoedesk
 
         echo json_encode($xd);
     }
-
-    // // View
-    // public function getconview()
-    // {
-    //     include 'db_config.php';
-    //     $likes = [];
-    //     $xd = [];
-
-    //     $sqlus = 'SELECT avg(views) FROM `mytable`';
-    //     $sqlca = 'SELECT avg(views) FROM `mytable_ca`';
-    //     $sqlgb = 'SELECT avg(views) FROM `mytable_gb`';
-    //     $sqlfr = 'SELECT avg(views) FROM `mytable_fr`';
-    //     $sqlin = 'SELECT avg(views) FROM `mytable`';
-        
-    //     $resultus = mysqli_query($link,$sqlus);
-    //     $resultca = mysqli_query($link,$sqlca);
-    //     $resultgb = mysqli_query($link,$sqlgb);
-    //     $resultfr = mysqli_query($link,$sqlfr);
-    //     $resultin = mysqli_query($link,$sqlin);
-
-    //     $us = mysqli_fetch_assoc($resultus);
-    //     $ca = mysqli_fetch_assoc($resultca);
-    //     $gb = mysqli_fetch_assoc($resultgb);
-    //     $fr = mysqli_fetch_assoc($resultfr);
-    //     $in = mysqli_fetch_assoc($resultin);
-
-    //     $likes['x'] = 'United States';
-    //     $likes['y'] = $us['avg(views)'];
-    //     array_push($xd, $likes);
-    //     $likes['x'] = 'Canada';
-    //     $likes['y'] = $ca['avg(views)'];
-    //     array_push($xd, $likes);
-    //     $likes['x'] = 'Great Britan';
-    //     $likes['y'] = $gb['avg(views)'];
-    //     array_push($xd, $likes);
-    //     $likes['x'] = 'France';
-    //     $likes['y'] = $fr['avg(views)'];
-    //     array_push($xd, $likes);
-    //     $likes['x'] = 'India';
-    //     $likes['y'] = $in['avg(views)'];
-    //     array_push($xd, $likes);
-
-
-    //     echo json_encode($xd);
-    // }
 
     // Multiple Line and bar chart - Likes bar/line
     public function getlikesforus()
@@ -1429,80 +1369,5 @@ class Zoedesk
         }
         echo json_encode($datasent);
     }
-
-
 // END
-    public function GetCityName()
-    {
-        include 'db_config.php';
-        $sql = "SELECT city FROM oc_hotel GROUP BY city";
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-        echo json_encode($data);
-    }
-
-    public function getRegisteredData()
-    {
-        include 'db_config.php';
-        $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : "";
-        $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : "";
-        if ($start_date == "") {
-            $sql = "SELECT * FROM `oc_registration` GROUP BY ref_id order by booking_date desc ";
-        } else {
-            $sql = "SELECT * FROM `oc_registration` where booking_date BETWEEN '$start_date' AND '$end_date' GROUP BY ref_id";
-        }
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-        if (mysqli_num_rows($result) > 0) {
-            echo json_encode($data);
-        } else {
-            echo '0';
-        }
-    }
-
-    public function getTravellerData()
-    {
-        include 'db_config.php';
-        $ref_id = $_POST['ref_id'];
-        $sql = "SELECT * FROM `oc_registration` where ref_id = '$ref_id'";
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-        echo json_encode($data);
-    }
-
-    public function searchRegisteredData()
-    {
-        include 'db_config.php';
-        $ref_id = $_POST['ref_id'];
-        $sql = "SELECT * FROM `oc_registration` where ref_id LiKE '%$ref_id%' order by booking_date desc";
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-        echo json_encode($data);
-    }
-    public function getUserByGin()
-    {
-        include 'db_config.php';
-        /*$gin = isset($_POST['gin']) ? $_POST['gin'] : "";*/
-        $gin = "1234";
-        $sql = "SELECT * FROM `oc_registration` WHERE `gin_id` = '$gin' GROUP BY gin_id";
-
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-
-        if (mysqli_num_rows($result) > 0) {
-            echo json_encode($data);
-        } else {
-            echo '0';
-        }
-    }
 }
