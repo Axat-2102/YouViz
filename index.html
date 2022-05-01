@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.ninjateam.org/html/spaceX/light/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Mar 2022 04:57:51 GMT -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>YouViz</title>
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="assets/styles/style.min.css">
+    <link rel="stylesheet" href="assets/styles/custom.css">
+
+    <!-- Themify Icon -->
+    <link rel="stylesheet" href="assets/fonts/themify-icons/themify-icons.css">
+
+    <!-- mCustomScrollbar -->
+    <link rel="stylesheet" href="assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+    <!-- Waves Effect -->
+    <link rel="stylesheet" href="assets/plugin/waves/waves.min.css">
+
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="assets/plugin/sweet-alert/sweetalert.css">
+
+
+
+</head>
+
+<body>
+    <div class="main-menu" style="background-color: #E6E6FA ;height: 5em">
+        <header class="header">
+            <a href="index.html" class="logo"style="color: #6C2DC7; opacity: 0.80;background-color: #E6E6FA; font-family: 'Poppins';font-size: 40px; height: 5em; margin-top: 10px;">YouViz</a>
+            <button type="button" class="button-close fa fa-times js__menu_close"></button>
+        </header>
+        <!-- /.header -->
+        <div class="content">
+
+            <div class="navigation">
+                <h5 class="title" style="background-color: #E6E6FA;"></h5>
+                <!-- /.title -->
+                <ul class="menu js__accordion">
+                    <li class="current">
+                        <a class="waves-effect" href="index.html" style="background-color: #6C2DC7; opacity: 0.80; border-radius: 10px;"><i
+                                class="menu-icon ti-dashboard"></i><span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="top-10.html"><i class="menu-icon ti-crown"></i><span>Top
+                                Trends</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="comparision.html"><i
+                                class="menu-icon ti-world"></i><span>Comparison</span></a>
+                    </li>
+                </ul>
+                <!-- /.menu js__accordion -->
+            </div>
+            <!-- /.navigation -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.main-menu -->
+
+    <div class="fixed-navbar" style="background-color: #E6E6FA; height: 5.35em;">
+        <div class="float-left">
+            <button type="button" class="menu-mobile-button fas fa-bars js__menu_mobile" style="background-color: #E6E6FA; margin-top: 10px; color: #6C2DC7; opacity: 0.80; font-size: 160%;"></button>
+            <select class="form-control select2_1" id="country" onchange="getcndata()" style="margin-top: 10px; color: #6C2DC7; font-size: 20px; border-radius: 10px;">
+                <option value="us">United States</option>
+                <option value="gb">Great Britan</option>
+                <option value="ca" selected>Canada</option>
+                <option value="fr">France</option>
+                <option value="in">India</option>
+            </select>
+            <!-- /.page-title -->
+        </div>
+        <!-- /.float-left -->
+        <!-- <div class="float-right">
+            <div class="ico-item">
+                <a href="#" class="ico-item ti-search js__toggle_open" data-target="#searchform-header"></a>
+                <form action="#" id="searchform-header" class="searchform js__toggle"><input type="search"
+                        placeholder="Search..." class="input-search"><button class="ti-search button-search"
+                        type="submit"></button></form>
+                 /.searchform 
+            </div>
+             /.ico-item 
+            <a href="#" class="ico-item ti-email notice-alarm js__toggle_open" data-target="#message-popup"></a>
+            <a href="#" class="ico-item ti-bell notice-alarm js__toggle_open" data-target="#notification-popup"></a>
+            <div class="ico-item">
+                <i class="ti-user"></i>
+                <ul class="sub-ico-item">
+                    <li><a href="#">Settings</a></li>
+                    <li><a class="js__logout" href="#">Log Out</a></li>
+                </ul>
+                 /.sub-ico-item 
+            </div>
+        </div> -->
+        <!-- /.float-right -->
+    </div>
+    <!-- /.fixed-navbar -->
+
+
+    <div id="wrapper">
+        <div class="main-content">
+            <div class="col-lg-12"style=" color: #6C2DC7;">
+                <div class="box-content">
+                    <h4 class="box-title">Views per category in span of 2 years</h4>
+                    <!-- /.dropdown js__dropdown -->
+
+                    <canvas id="myChart" maxheight="320px">
+                        
+                    </canvas>
+
+                    <!-- /#flot-chart-1.flot-chart -->
+                </div>
+                <!-- /.box-content -->
+            </div>
+            <!-- /.col-xl-6 col-lg-12 -->
+            <div class="col-lg-12"style=" color: #6C2DC7;">
+                <div class="box-content">
+                    <h4 class="box-title">Comparision of Likes-Dislikes-Commnets between all categories</h4>
+                    <!-- /.dropdown js__dropdown -->
+
+                    <canvas id="mymixChart" maxheight="320px"></canvas>
+
+                    <!-- /#flot-chart-1.flot-chart -->
+                </div>
+                <!-- /.box-content -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.main-content -->
+    </div>
+    <!--/#wrapper -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/scripts/modernizr.min.js" type="text/javascript"></script>
+    <script src="assets/plugin/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+    <script src="assets/plugin/nprogress/nprogress.js" type="text/javascript"></script>
+    <script src="assets/plugin/sweet-alert/sweetalert.min.js" type="text/javascript"></script>
+    <script src="assets/plugin/waves/waves.min.js" type="text/javascript"></script>
+
+    <script src="jquery-csv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+
+
+    <!-- <script>
+        $(document).ready(function () {
+            $.getJSON("Datasets/US_category_id.json", function (data) {
+                //get cat
+                const category_id = [];
+                for (let i = 0; i < data.items.length; i++) {
+                    console.log("ID - " + data.items[i].id + " And Title" + data.items[i].snippet.title);
+                    category_id.push(data.items[i].id);
+                }
+                
+                //get videos from cat
+                var videos;
+                const videoscat = [];
+                const videosbycat = [];
+                for (let i = 0; i < 2; i++) {
+                $.ajax({
+                    type: "GET",
+                    url: "Datasets/USvideos.csv",
+                    dataType: "text",
+                    success: function (response) {
+                        videos = $.csv.toObjects(response);
+                        for (let i = 0; i < videos.length; i++) {
+                            if (videos[i].category_id == 1){
+                                console.log(videos[i].video_id);
+                                videoscat.push(videos[i].video_id);
+                            }
+                        }
+                        console.log(videoscat);
+                    }
+                });
+            }
+            });
+        });
+    </script> -->
+
+    <!-- <script>
+        $(document).ready(function () {
+            $.getJSON("Datasets/US_category_id.json", function (data) {
+                const labels = []
+                //get cat
+                const category_id = [];
+                for (let i = 0; i < data.items.length; i++) {
+                    console.log("ID - " + data.items[i].id + " And Title" + data.items[i].snippet.title);
+                    category_id.push(data.items[i].id);
+                }
+            });
+        });
+    </script> -->
+
+
+
+    <script>
+        const labels = []
+        const data = {
+            labels: labels,
+            datasets: []
+        };
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        // text: 'Trending category on time scale'
+                    }
+                }
+            },
+        });
+
+
+        function setcat() {
+            $.getJSON("Datasets/US_category_id.json", function (data) {
+                const labels = []
+                //get cat
+                const category_id = [];
+                for (let i = 0; i < data.items.length; i++) {
+                    //console.log("ID - " + data.items[i].id + " And Title" + data.items[i].snippet.title);
+                    //test(data.items[i].id);
+                    test1(data.items[i].id, data.items[i].snippet.title, Math.floor(Math.random() * 16777215).toString(16));
+                }
+            });
+        }
+
+
+
+        function test1(value, catnm, color) {
+            const lable = 'l1';
+            var cn = $("#country option:selected").val()
+            if (cn == 'ca') {
+                var seturl = "api.php?method=getchartdataforcanada";
+            } else if (cn == 'us') {
+                var seturl = "api.php?method=getchartdataforus";
+            } else if (cn == '') {
+                var seturl = "api.php?method=getchartdataforcanada";
+            } else if (cn == 'gb') {
+                var seturl = "api.php?method=getchartdataforbritan";
+            } else if (cn == 'in') {
+                var seturl = "api.php?method=getchartdataforindia";
+            } else if (cn == 'fr') {
+                var seturl = "api.php?method=getchartdataforfrance";
+            }
+
+            $.ajax({
+                url: seturl,
+                async: true,
+                method: "POST",
+                data: {
+                    cat_id: value,
+                    from: "17.01.01",
+                    to: "17.01.31"
+                },
+                datatype: "json",
+                success: function (response) {
+                    //console.log(response);
+                    let dataxa = JSON.parse(response);
+                    console.info(color);
+                    myChart.data.datasets.push({
+                        label: catnm,
+                        data: dataxa,
+                        borderColor: '#' + color,
+                        backgroundColor: '#' + color
+                    });
+                    myChart.update();
+                    return response;
+                },
+                error: function (response) {
+                    //console.log(response);
+                },
+            });
+
+        }
+        setcat();
+    </script>
+
+
+
+    <!-- Plot - 2 : Like VS Dislike VS Comment -->
+    <script>
+        const labels1 = [];
+        const datas = {
+            labels: labels1,
+            datasets: []
+        };
+        const ctx1 = document.getElementById('mymixChart').getContext('2d');
+        const mymixChart = new Chart(ctx1, {
+            type: 'bar',
+            data: datas,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'LIKES vs COMMENTS vs DISLIKES'
+                    }
+                }
+            },
+        });
+
+
+        // likes
+        function likedis() {
+            var cn = $("#country option:selected").val()
+            if (cn == 'ca') {
+                var seturl = "api.php?method=getlikesforcanada";
+            } else if (cn == 'us') {
+                var seturl = "api.php?method=getlikesforus";
+            } else if (cn == '') {
+                var seturl = "api.php?method=getlikesforus";
+            } else if (cn == 'gb') {
+                var seturl = "api.php?method=getlikesforbritan";
+            } else if (cn == 'in') {
+                var seturl = "api.php?method=getlikesforindia";
+            } else if (cn == 'fr') {
+                var seturl = "api.php?method=getlikesforfrance";
+            }
+            $.ajax({
+                url: seturl,
+                async: true,
+                method: "GET",
+                datatype: "json",
+                success: function (response1) {
+                    console.log(response1);
+                    let datala = JSON.parse(response1);
+                    console.info(datala);
+                    mymixChart.data.datasets.push({
+                        label: ['Likes'],
+                        data: datala,
+                        borderColor: 'teal',
+                        backgroundColor: 'teal',
+                        //type: 'line',
+                        order: 2
+                    });
+                    mymixChart.update();
+                },
+                error: function (response) {
+                    //console.log(response);
+                },
+            });
+        }
+
+
+        // dislikes
+        function dislike() {
+            var cn = $("#country option:selected").val()
+            if (cn == 'ca') {
+                var seturl = "api.php?method=getdislikesforcanada";
+            } else if (cn == 'us') {
+                var seturl = "api.php?method=getdislikesforus";
+            } else if (cn == '') {
+                var seturl = "api.php?method=getdislikesforus";
+            } else if (cn == 'gb') {
+                var seturl = "api.php?method=getdislikesforbritan";
+            } else if (cn == 'in') {
+                var seturl = "api.php?method=getdislikesforindia";
+            } else if (cn == 'fr') {
+                var seturl = "api.php?method=getdislikesforfrance";
+            }
+            $.ajax({
+                url: seturl,
+                async: true,
+                method: "GET",
+                datatype: "json",
+                success: function (response1) {
+                    console.log(response1);
+                    let data_dislike = JSON.parse(response1);
+                    console.info(data_dislike);
+                    mymixChart.data.datasets.push({
+                        label: ['Dislike'],
+                        data: data_dislike,
+                        borderColor: 'magenta',
+                        backgroundColor: 'magenta',
+                        order: 0
+                    });
+                    mymixChart.update();
+                },
+                error: function (response) {
+                    //console.log(response);
+                },
+            });
+        }
+
+        // comments
+        function comment() {
+            var cn = $("#country option:selected").val()
+            if (cn == 'ca') {
+                var seturl = "api.php?method=getcommentsforcanada";
+            } else if (cn == 'us') {
+                var seturl = "api.php?method=getcommentsforus";
+            } else if (cn == '') {
+                var seturl = "api.php?method=getcommentsforus";
+            } else if (cn == 'gb') {
+                var seturl = "api.php?method=getcommentsforbritan";
+            } else if (cn == 'in') {
+                var seturl = "api.php?method=getcommentsforindia";
+            } else if (cn == 'fr') {
+                var seturl = "api.php?method=getcommentsforfrance";
+            }
+            $.ajax({
+                url: seturl,
+                async: true,
+                method: "GET",
+                datatype: "json",
+                success: function (response1) {
+                    console.log(response1);
+                    let data_comment = JSON.parse(response1);
+                    console.info(data_comment);
+                    mymixChart.data.datasets.push({
+                        label: ['Comment'],
+                        data: data_comment,
+                        borderColor: 'gold',
+                        backgroundColor: 'gold',
+                        order: 1
+                    });
+                    mymixChart.update();
+                },
+                error: function (response) {
+                    //console.log(response);
+                },
+            });
+        }
+
+
+        function getcndata(){
+            for (x = 0; x < 50; x++) {
+                mymixChart.data.datasets.pop();
+                myChart.data.datasets.pop();
+                myChart.update();
+                mymixChart.update();
+            }
+        setcat();
+        likedis();
+        dislike();
+        comment();
+        }
+
+        likedis();
+        dislike();
+        comment();
+    </script>
+
+
+    <script src="assets/scripts/main.min.js" type="text/javascript"></script>
+    <script src="assets/scripts/mycommon.js" type="text/javascript"></script>
+    <script src="assets/scripts/rocket-loader.min.js" type="text/javascript"></script>
+</body>
+
+<!-- Mirrored from demo.ninjateam.org/html/spaceX/light/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Mar 2022 04:58:15 GMT -->
+
+</html>
+
+</html>
